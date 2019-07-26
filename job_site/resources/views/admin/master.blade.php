@@ -37,21 +37,23 @@
 
 <body>
 
-<div id="wrapper">
+<div id="app">
+    <div id="wrapper">
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
 
-        <!-- /.navbar-top-links -->
+            <!-- /.navbar-top-links -->
 
         @include('admin.includes.nav')
         @include('admin.includes.sidebar')
         <!-- /.navbar-static-side -->
-    </nav>
+        </nav>
 
     @yield('body')
     <!-- /#page-wrapper -->
 
+    </div>
 </div>
 <!-- /#wrapper -->
 
