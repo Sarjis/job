@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Company;
+use App\Profile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class CompanyController extends Controller
+class ApplicationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,16 @@ class CompanyController extends Controller
      */
     public function index()
     {
-       // return view('admin.company.index');
+        $id = Auth::user()->id;
+        $verifyApplicant = Profile::find($id);
+
+        if ($verifyApplicant) {
+            return view('admin.master');
+        } else {
+//            return view('profile.index')->with(['message'=>'Please fill the form']);
+            return redirect('/profile')->with(['message' => 'Please fill the form']);
+        }
+
     }
 
     /**
@@ -35,11 +45,8 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-//        Company::create($request->all());
-//        return redirect('/company')->with(['message'=>'saved']);
+        //
     }
-
-
 
     /**
      * Display the specified resource.
@@ -72,7 +79,7 @@ class CompanyController extends Controller
      */
     public function update(Request $request, $id)
     {
-
+        //
     }
 
     /**

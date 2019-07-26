@@ -12,11 +12,11 @@ class ApplicantController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        return view('admin.applicant.index');
-
-    }
+//    public function index()
+//    {
+//        return view('admin.applicant.index');
+//
+//    }
 
     /**
      * Show the form for creating a new resource.
@@ -29,11 +29,11 @@ class ApplicantController extends Controller
     }
 
 
-    public function store(Request $request)
-    {
-        Applicant::create($request->all());
-        return redirect('/applicant')->with(['message'=>'saved']);
-    }
+//    public function store(Request $request)
+//    {
+//        Applicant::create($request->all());
+//        return redirect('/applicant')->with(['message'=>'saved']);
+//    }
 
 
     public function show($id)
