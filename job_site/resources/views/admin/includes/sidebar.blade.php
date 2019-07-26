@@ -42,7 +42,14 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="info">
-                <router-link to="/" class="d-block">Alexander Pierce</router-link>
+                @if(Auth::user())
+                    <a href="{{route('profile.show',['profile'=>\Illuminate\Support\Facades\Auth::user()->id])}}"
+                       class="d-block">{{Auth::user()->first_name}}</a>
+                @else
+                    <a href="{{route('login')}}"
+                       class="d-block">Login</a>
+                @endif
+
             </div>
         </div>
 
