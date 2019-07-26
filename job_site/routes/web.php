@@ -1,6 +1,6 @@
 <?php
 
-Route::get('/','PageController@index');
+Route::get('/','PageController@index')->name('/');
 
 
 Auth::routes();
@@ -16,3 +16,5 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('company','CompanyController');
 
 });
+
+Route::get("/{path}", "PageController@index")->where('path', '.*');

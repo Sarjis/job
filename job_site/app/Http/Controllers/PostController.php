@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Company;
 use App\Post;
+use App\User;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -12,7 +13,9 @@ class PostController extends Controller
     public function index()
     {
 
-        return view('admin.post.index', ['companies' => Company::all('business_name', 'id')]);
+//        return view('admin.post.index', ['companies' => Company::all('business_name', 'id')]);
+        return view('admin.post.index', ['companies' => User::all('business_name', 'id')
+            ->where('business_name', '!=', 'applicant')]);
     }
 
     public function create()
@@ -28,16 +31,11 @@ class PostController extends Controller
         return redirect('/post')->with(['message' => 'saved']);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
-        $post = Post::find($id);
-        return $post;
+        //return Post::find($id);
+        return view('admin.post.show', ['post' => Post::find($id)]);
     }
 
     /**

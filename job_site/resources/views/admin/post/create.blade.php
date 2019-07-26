@@ -1,7 +1,7 @@
 @extends('admin.master')
 
 @section('body')
-    <div id="page-wrapper">
+    <div class="content-wrapper">
         <h3 class="text-center text-success"> {{Session::get('message')}}</h3>
         <div class="table-responsive">
             <table class="table table-bordered table-hover">
@@ -19,6 +19,7 @@
                     <tr>
                         <td>{{$i++}}</td>
                         <td>{{$post->Job_title}}</td>
+                        <td>{{$post->Job_Description}}</td>
                         <td>
                             <a href="{{route('post.show',['post'=>$post->id])}}">Details</a>
                         </td>

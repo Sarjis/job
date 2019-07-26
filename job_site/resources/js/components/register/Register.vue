@@ -13,18 +13,22 @@
 
             <div class="form-group">
                 <label>Registered As ? </label>
-                <select class="form-control" v-model="form.type">
-                    <option value="2">Applicant</option>
+                <select @change="changeType" class="form-control" v-model="form.type">
+                    <option  value="">se</option>
+                    <option value="0">Applicant</option>
                     <option value="1">Company</option>
 
                 </select>
                 {{form.type}}
             </div>
 
-            <div v-if="form.type===1" class="form-group">
+            <div class="form-group">
                 <label>Business Name</label>
-                <input type="text" class="form-control" v-model="form.business_name" placeholder="Business Name">
+                <input  type="text" class="form-control" v-model="form.business_name" placeholder="Business Name">
             </div>
+
+
+
 
             <div class="form-group">
                 <label>Email</label>
@@ -63,20 +67,35 @@
                     last_name: '',
                     business_name: '',
                     email: '',
-                    type: 2,
+                    type: 1,
                     password: '',
                     password_confirmation: '',
-                }
+                },
+                //type:true
             }
         },
         methods: {
             saveRegistrationInfo() {
+                let that= this
                 this.$axios.post('register', this.form).then(function (res) {
-                    alert('Hi')
+                    //alert('Hi');
+                    that.$router.push('/')
+
                 }).catch(function (err) {
                     alert('No')
                 })
 
+            },
+            changeType() {
+
+                // if (this.form.type === 1) {
+                //     this.form.type = 0
+                // } else {
+                //     this.form.type = 1
+                // }
+
+                //this.form.type = !this.form.type
+                alert('If you applicant you dont need to provide Business Name')
             }
         }
     }
