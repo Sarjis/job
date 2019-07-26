@@ -16,10 +16,10 @@ class ApplicationController extends Controller
     public function index()
     {
         $id = Auth::user()->id;
-        $verifyApplicant = Profile::find($id);
+        $verifyApplicant = Profile::where('applicant_id', $id);
 
         if ($verifyApplicant) {
-            return view('admin.master');
+            return redirect('/')->with(['message' => 'Successfully Applied']);
         } else {
 //            return view('profile.index')->with(['message'=>'Please fill the form']);
             return redirect('/profile')->with(['message' => 'Please fill the form']);
