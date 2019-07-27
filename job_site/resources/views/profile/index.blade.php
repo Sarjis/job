@@ -9,7 +9,8 @@
                         <h3 class="text-center text-success"> {{Session::get('message')}}</h3>
 
                         <div class="panel-body">
-                            <form action="{{ route('profile.store') }}" method="POST" class="form-horizontal" enctype="multipart/form-data">
+                            <form action="{{ route('profile.store') }}" method="POST" class="form-horizontal"
+                                  enctype="multipart/form-data">
                                 {{ csrf_field() }}
                                 <div class="form-group">
                                     <label class="control-label col-md-3">Profile Picture</label>
@@ -21,7 +22,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-3">Resume</label>
                                     <div class="col-md-9">
-                                        <input type="file" name="resume" accept="application/pdf" />
+                                        <input type="file" name="resume" accept="application/pdf"/>
 
                                     </div>
                                 </div>
@@ -38,12 +39,16 @@
                                     <label class="control-label col-md-3">Applicant Name</label>
                                     <div class="col-md-9">
 
-                                        <select name="applicant_id" class="form-control">
-                                            <option>Select your Name</option>
-                                            @foreach($applicants as $applicant)
-                                            <option value="{{$applicant->id}}">{{$applicant->first_name}} {{$applicant->last_name}}</option>
-                                            @endforeach
-                                        </select>
+                                        @if($applicants )
+                                            <select name="user_id" class="form-control">
+                                                <option>Select your Name</option>
+                                                @foreach($applicants as $applicant)
+                                                    <option value="{{$applicant->id}}">{{$applicant->first_name}} {{$applicant->last_name}}</option>
+                                                @endforeach
+                                            </select>
+                                        @else
+                                            <h1>something wrong</h1>
+                                        @endif
                                     </div>
                                 </div>
 

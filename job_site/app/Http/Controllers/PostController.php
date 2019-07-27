@@ -14,8 +14,7 @@ class PostController extends Controller
     {
 
 //        return view('admin.post.index', ['companies' => Company::all('business_name', 'id')]);
-        return view('admin.post.index', ['companies' => User::all('business_name', 'id')
-            ->where('business_name', '!=', 'applicant')]);
+        return view('admin.post.index', ['companies' => User::where('business_name', '!=', 'applicant')]);
     }
 
     public function create()

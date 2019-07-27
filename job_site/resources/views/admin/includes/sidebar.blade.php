@@ -43,7 +43,7 @@
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="info">
                 @if(Auth::user())
-                    <a href="{{route('profile.show',['profile'=>\Illuminate\Support\Facades\Auth::user()->id])}}"
+                    <a href="{{route('profile.index')}}"
                        class="d-block">{{Auth::user()->first_name}}</a>
                 @else
                     <a href="{{route('login')}}"

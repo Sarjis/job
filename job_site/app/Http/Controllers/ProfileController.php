@@ -5,20 +5,21 @@ namespace App\Http\Controllers;
 use App\Profile;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Image;
 
 class ProfileController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
 
         //return User::where('business_name', 'applicant')->get();
-        return view('profile.index', ['applicants' => User::where('business_name', 'applicant')->get()]);
+        if (Auth::user()->id) {
+            return view('profile.index', ['applicants' => User::where('business_name', 'applicant')->get()]);
+
+        }
+        return view('admin.master');
 
     }
 
@@ -35,6 +36,7 @@ class ProfileController extends Controller
 
     public function store(Request $request)
     {
+        // return $request;
 //        request()->validate([
 //
 //            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -43,18 +45,24 @@ class ProfileController extends Controller
 //        ]);
 
         //return $request->applicant_id;
-        $imageName = time() . '.' . request()->image->getClientOriginalExtension();
-        $resume = time() . '.' . request()->resume->getClientOriginalExtension();
+        if ($request->image && $request->resume){
+            $imageName = time() . '.' . request()->image->getClientOriginalExtension();
+            $imageUrl = request()->image->move(('images'), $imageName);
 
-        $imageUrl = request()->image->move(public_path('images'), $imageName);
-        $pdfUrl = request()->resume->move(public_path('docs'), $resume);
-        $profile = new Profile();
-        $profile->image = $imageUrl;
-        $profile->resume = $pdfUrl;
-        $profile->skills = $request->skills;
-        $profile->applicant_id = $request->applicant_id;
-        $profile->save();
-        return redirect('/profile')->with(['message' => 'saved']);
+
+            $resume = time() . '.' . request()->resume->getClientOriginalExtension();
+            $pdfUrl = request()->resume->move(('docs'), $resume);
+
+            $profile = new Profile();
+            $profile->image = $imageUrl;
+            $profile->resume = $pdfUrl;
+
+            $profile->skills = $request->skills;
+            $profile->user_id = $request->user_id;
+            $profile->save();
+            return redirect('/profile')->with(['message' => 'saved']);
+        }
+
 
 //
 //        return $request->all();
@@ -81,13 +89,19 @@ class ProfileController extends Controller
      */
     public function edit($id)
     {
-        $verifier = Profile::where('applicant_id', $id);
+        $verifier = Profile::where('user_id', $id)->select('id')->first();
 
-        if ($verifier) {
+        //return $verifier->id;
+        $user_id = Auth::user()->id;
 
-            return view('profile.edit', ['profile' => Profile::find($id)]);
+        if ($verifier->id == $user_id) {
+
+            return view('profile.edit', ['profile' => Profile::with('user')->find($id), 'users' => User::all()]);
+        }else{
+            //return view('profile.index');
+            return 'Hello';
         }
-        return view('profile.index');
+
 
     }
 
@@ -100,7 +114,27 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $profile = Profile::find($id);
+
+        if ($request->image && $request->resume){
+            $imageName = time() . '.' . request()->image->getClientOriginalExtension();
+            $resume = time() . '.' . request()->resume->getClientOriginalExtension();
+
+            $imageUrl = request()->image->move(('images'), $imageName);
+            $pdfUrl = request()->resume->move(('docs'), $resume);
+
+            unlink($profile->image);
+            unlink($profile->resume);
+
+            $profile->skills = $request->skills;
+            $profile->user_id = $request->user_id;
+            $profile->resume = $pdfUrl;
+            $profile->image = $imageUrl;
+            $profile->update();
+            return redirect('/profile')->with(['message'=>'Updated']);
+        }
+        return 'Hello';
+
     }
 
     /**
