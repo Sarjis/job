@@ -8,21 +8,19 @@ use Illuminate\Support\Facades\Auth;
 
 class ApplicationController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $id = Auth::user()->id;
-        $verifyApplicant = Profile::where('applicant_id', $id);
+        $verifyApplicant = Profile::where('user_id', $id)->first();
+        //return $verifyApplicant;
 
         if ($verifyApplicant) {
             return redirect('/')->with(['message' => 'Successfully Applied']);
         } else {
 //            return view('profile.index')->with(['message'=>'Please fill the form']);
             return redirect('/profile')->with(['message' => 'Please fill the form']);
+
         }
 
     }

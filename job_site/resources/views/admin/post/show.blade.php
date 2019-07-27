@@ -1,4 +1,4 @@
-@extends('admin.master')
+
 @extends('admin.master')
 {{--@extends('layouts.app')--}}
 
@@ -15,7 +15,8 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-3">Job Title</label>
                                     <div class="col-md-9">
-                                        <input type="text" value="{{$post->Job_title}}"  name="job_title" class="form-control"/>
+                                        <input type="text" value="{{$post->Job_title}}" name="job_title"
+                                               class="form-control"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -28,34 +29,43 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-3">Salary</label>
                                     <div class="col-md-9">
-                                        <input type="text" value="{{$post->salary}}"  name="salary" class="form-control"/>
+                                        <input type="text" value="{{$post->salary}}" name="salary"
+                                               class="form-control"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-3">Location</label>
                                     <div class="col-md-9">
-                                        <input type="text" value="{{$post->location}}"  name="location" class="form-control"/>
+                                        <input type="text" value="{{$post->location}}" name="location"
+                                               class="form-control"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-3">Country</label>
                                     <div class="col-md-9">
-                                        <input type="text" value="{{$post->country}}"  name="country" class="form-control"/>
+                                        <input type="text" value="{{$post->country}}" name="country"
+                                               class="form-control"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-3">Company Name</label>
                                     <div class="col-md-9">
-                                        <input type="text" name="country" value="{{$post->company_id}}" class="form-control"/>
+                                        @if($post->user)
+                                            <input type="text" name="country" value="{{$post->user->business_name}}"
+                                                   class="form-control"/>
+                                        @endif
+
 
                                     </div>
                                 </div>
+                                @can('isApplicant')
 
-                                <div class="form-group">
-                                    <div class="col-md-9 col-md-offset-3">
-                                        <a href="{{route('application.index')}}" name="btn" class="btn btn-success">Apply </a>
+                                    <div class="form-group">
+                                        <div class="col-md-9 col-md-offset-3">
+                                            <a href="{{route('application.index')}}" name="btn" class="btn btn-success">Apply </a>
+                                        </div>
                                     </div>
-                                </div>
+                                @endcan
 
                             </form>
                         </div>

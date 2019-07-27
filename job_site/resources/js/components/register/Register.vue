@@ -1,59 +1,73 @@
 <template>
-    <form @submit.prevent="saveRegistrationInfo" role="form">
-        <div class="card-body">
-            <div class="form-group">
-                <label>First Name</label>
-                <input type="text" class="form-control" v-model="form.first_name" placeholder="First Name">
+
+
+    <div class="content-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-8">
+                    <!-- general form elements -->
+                    <div class="card card-primary">
+
+                        <form @submit.prevent="saveRegistrationInfo" role="form">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label>First Name</label>
+                                    <input type="text" class="form-control" v-model="form.first_name" placeholder="First Name">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Last Name</label>
+                                    <input type="text" class="form-control" v-model="form.last_name" placeholder="Last Name">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Registered As ? </label>
+                                    <select @change="changeType" class="form-control" v-model="form.type">
+                                        <option  value="">se</option>
+                                        <option value="0">Applicant</option>
+                                        <option value="1">Company</option>
+
+                                    </select>
+                                    {{form.type}}
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Business Name</label>
+                                    <input  type="text" class="form-control" v-model="form.business_name" placeholder="Business Name">
+                                </div>
+
+
+
+
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input type="email" class="form-control" v-model="form.email" placeholder="Enter email">
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input type="password" class="form-control" v-model="form.password">
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input type="password" class="form-control" v-model="form.password_confirmation" placeholder="Password">
+                                </div>
+
+
+                            </div>
+                            <!-- /.card-body -->
+
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-
-            <div class="form-group">
-                <label>Last Name</label>
-                <input type="text" class="form-control" v-model="form.last_name" placeholder="Last Name">
-            </div>
-
-            <div class="form-group">
-                <label>Registered As ? </label>
-                <select @change="changeType" class="form-control" v-model="form.type">
-                    <option  value="">se</option>
-                    <option value="0">Applicant</option>
-                    <option value="1">Company</option>
-
-                </select>
-                {{form.type}}
-            </div>
-
-            <div class="form-group">
-                <label>Business Name</label>
-                <input  type="text" class="form-control" v-model="form.business_name" placeholder="Business Name">
-            </div>
-
-
-
-
-            <div class="form-group">
-                <label>Email</label>
-                <input type="email" class="form-control" v-model="form.email" placeholder="Enter email">
-            </div>
-
-
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" class="form-control" v-model="form.password">
-            </div>
-
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" class="form-control" v-model="form.password_confirmation" placeholder="Password">
-            </div>
-
-
         </div>
-        <!-- /.card-body -->
-
-        <div class="card-footer">
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-    </form>
+    </div>
 </template>
 
 <script>

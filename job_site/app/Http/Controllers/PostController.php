@@ -10,16 +10,8 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
 
-    public function __construct()
-    {
-        //$this->authorize('isCompany');
-
-
-    }
     public function index()
     {
-
-//        return view('admin.post.index', ['companies' => Company::all('business_name', 'id')]);
         return view('admin.post.index', ['companies' => User::where('type', '1')->get()]);
     }
 
@@ -31,7 +23,6 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-        //return $request->all();
         Post::create($request->all());
         return redirect('/post')->with(['message' => 'saved']);
     }
@@ -39,7 +30,6 @@ class PostController extends Controller
 
     public function show($id)
     {
-        //return Post::find($id);
         return view('admin.post.show', ['post' => Post::find($id)]);
     }
 

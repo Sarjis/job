@@ -1,6 +1,7 @@
 @extends('admin.master')
 
 @section('body')
+    @can('isApplicant')
     <div class="content-wrapper">
         <div class="container">
             <div class="row">
@@ -87,4 +88,5 @@
             </div>
         </div>
     </div>
+    @endcan
 @endsection

@@ -1,6 +1,7 @@
 <?php
 
-Route::get('/', 'PageController@index')->name('/');
+Route::get('/posts', 'PageController@index')->name('/posts');
+//Route::get('/', 'PageController@index')->name('/');
 
 
 Auth::routes();

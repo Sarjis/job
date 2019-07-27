@@ -31,7 +31,8 @@ class ProfileController extends Controller
 
     public function create()
     {
-        //
+        return view('profile.create', ['profiles' => Profile::with('user')->get()]);
+        return;
     }
 
 
@@ -49,9 +50,9 @@ class ProfileController extends Controller
 
         //return $request->applicant_id;
 
-        if (Profile::where('user_id',$request->user_id)->first()){
+        if (Profile::where('user_id', $request->user_id)->first()) {
             return 'You have made it';
-        }else  if ($request->image && $request->resume){
+        } else if ($request->image && $request->resume) {
             $imageName = time() . '.' . request()->image->getClientOriginalExtension();
             $imageUrl = request()->image->move(('images'), $imageName);
 
@@ -70,8 +71,6 @@ class ProfileController extends Controller
         }
 
 
-
-
 //
 //        return $request->all();
 //        Profile::create($request->all());
@@ -81,25 +80,41 @@ class ProfileController extends Controller
 
     public function show($id)
     {
-        //
+        $user_id = Auth::user()->id;
+        $verifyApplicant = Profile::where('user_id', $user_id)->first();
+        if ($verifyApplicant) {
+            return view('profile.show', ['profile' => Profile::find($id)]);
+        } else {
+//            return view('profile.index')->with(['message'=>'Please fill the form']);
+            return redirect('/profile')->with(['message' => 'Please fill the form']);
+
+        }
+
     }
 
 
     public function edit($id)
     {
-        $verifier = Profile::where('user_id', $id)->select('id')->first();
-
-        //return $verifier->id;
         $user_id = Auth::user()->id;
+        $verifyApplicant = Profile::where('user_id', $user_id)->first();
+        if ($verifyApplicant) {
+            $verifier = Profile::where('user_id', $id)->select('id')->first();
+            $user_identity = Auth::user()->id;
 
-        if ($verifier->id == $user_id) {
+            if ($verifier->id == $user_identity) {
 
-            return view('profile.edit', ['profile' => Profile::with('user')
-                ->find($id), 'users' => User::where('type',0)->get()]);
-        }else{
-            //return view('profile.index');
-            return 'Hello';
+                return view('profile.edit', ['profile' => Profile::with('user')
+                    ->find($id), 'users' => User::where('type', 0)->get()]);
+            } else {
+                //return view('profile.index');
+                return 'Hello';
+            }
+        } else {
+//            return view('profile.index')->with(['message'=>'Please fill the form']);
+            return redirect('/profile')->with(['message' => 'Please fill the form']);
+
         }
+
 
 
     }
@@ -108,7 +123,7 @@ class ProfileController extends Controller
     {
         $profile = Profile::find($id);
 
-        if ($request->image && $request->resume){
+        if ($request->image && $request->resume) {
             $imageName = time() . '.' . request()->image->getClientOriginalExtension();
             $resume = time() . '.' . request()->resume->getClientOriginalExtension();
 
@@ -123,7 +138,7 @@ class ProfileController extends Controller
             $profile->resume = $pdfUrl;
             $profile->image = $imageUrl;
             $profile->update();
-            return redirect('/profile')->with(['message'=>'Updated']);
+            return redirect('/profile')->with(['message' => 'Updated']);
         }
         return 'Hello';
 

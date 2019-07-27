@@ -51,26 +51,16 @@
 <body class="hold-transition sidebar-mini">
 <div class="wrapper" id="app">
 
-   @include('admin.includes.nav')
-   @include('admin.includes.sidebar')
+    @include('admin.includes.nav')
+    @include('admin.includes.sidebar')
 
-    @yield('body')
-    <div class="content-wrapper">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-8">
-                    <!-- general form elements -->
-                    <div class="card card-primary">
+    @if(!(\Illuminate\Support\Facades\Auth::user()))
+        <router-view></router-view>
+@endif
 
-                            <router-view></router-view>
-                        </div>
-                 </div>
-            </div>
-        </div>
-    </div>
+@yield('body')
 
-
-    <!-- /.content-wrapper -->
+<!-- /.content-wrapper -->
     <footer class="main-footer">
         <strong>Copyright &copy; 2014-2018 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
         All rights reserved.

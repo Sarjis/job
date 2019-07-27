@@ -14,13 +14,13 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-3">Job Title</label>
                                     <div class="col-md-9">
-                                        <input type="text" name="job_title" class="form-control"/>
+                                        <input type="text" name="Job_title" class="form-control"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-3">Job Description</label>
                                     <div class="col-md-9">
-                                        <input type="text" name="job_description" class="form-control"/>
+                                        <input type="text" name="Job_description" class="form-control"/>
                                     </div>
                                 </div>
 
@@ -46,7 +46,7 @@
                                     <label class="control-label col-md-3">Company Name</label>
                                     <div class="col-md-9">
 
-                                        <select name="company_id" class="form-control">
+                                        <select name="user_id" class="form-control">
                                             @foreach($companies as $company)
                                                 <option value="{{$company->id}}">{{$company->business_name}}</option>
                                             @endforeach
@@ -56,7 +56,7 @@
 
                                 <div class="form-group">
                                     <div class="col-md-9 col-md-offset-3">
-                                        <input type="submit" name="btn" value="Save post Info" class="btn btn-success"/>
+                                        <input type="submit" name="btn" value="Save Job Info" class="btn btn-success btn-block"/>
                                     </div>
                                 </div>
 
