@@ -39,7 +39,7 @@
                             </td>
 
                             <td>
-                                <a href="{{route('post.show',['post'=>$profile->id])}}">Select</a>
+                                <a href="{{route('register',['id'=>\Illuminate\Support\Facades\Auth::user()->id,'profile_id'=>$profile->id])}}">Select</a>
                             </td>
 
 

@@ -21,6 +21,8 @@ class CreatePostsTable extends Migration
             $table->text('location');
             $table->string('country');
             $table->integer('user_id');
+            $table->integer('applicant_id')->nullable();
+
             $table->timestamps();
         });
     }

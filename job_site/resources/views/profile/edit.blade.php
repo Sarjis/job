@@ -9,7 +9,7 @@
                     <div class="panel panel-default">
                         <h3 class="text-center text-success"> {{Session::get('message')}}</h3>
 
-                        @if($profile && \Illuminate\Support\Facades\Auth::user())
+                        {{--@if($profile && \Illuminate\Support\Facades\Auth::user())--}}
                             <div class="panel-body">
 
                                 <form accept-charset="UTF-8"
@@ -80,9 +80,9 @@
 
                                 </form>
                             </div>
-                        @else
-                            <h1>You are not allowed to Edit</h1>
-                        @endif
+                        {{--@else--}}
+                            {{--<h1>You are not allowed to Edit</h1>--}}
+                        {{--@endif--}}
                     </div>
                 </div>
             </div>

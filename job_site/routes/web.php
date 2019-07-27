@@ -12,9 +12,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('post', 'PostController');
     Route::resource('profile', 'ProfileController');
-
-    //Route::resource('applicant', 'ApplicantController');
-    //Route::resource('company', 'CompanyController');
+    Route::get('/register/{id}/{profile_id}', 'ProfileController@makeRegister')->name('register');
+    Route::get('/application/select{id}', 'ApplicationController@makeApplicationSelected')->name('application/select');
     Route::resource('application', 'ApplicationController');
 
 

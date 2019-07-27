@@ -69,21 +69,21 @@ class ProfileController extends Controller
             $profile->save();
             return redirect('/profile')->with(['message' => 'saved']);
         }
-
-
-//
-//        return $request->all();
-//        Profile::create($request->all());
-//        return redirect('/profile')->with(['message'=>'saved']);
     }
 
 
     public function show($id)
     {
+        //return $id;
         $user_id = Auth::user()->id;
+        //return $user_id;
         $verifyApplicant = Profile::where('user_id', $user_id)->first();
-        if ($verifyApplicant) {
-            return view('profile.show', ['profile' => Profile::find($id)]);
+        //return $verifyApplicant;
+
+        if ($verifyApplicant->id) {
+
+            //return Profile::where('user_id',$id);
+            return view('profile.show', ['profile' => Profile::where('user_id', $id)->first()]);
         } else {
 //            return view('profile.index')->with(['message'=>'Please fill the form']);
             return redirect('/profile')->with(['message' => 'Please fill the form']);
@@ -96,15 +96,28 @@ class ProfileController extends Controller
     public function edit($id)
     {
         $user_id = Auth::user()->id;
-        $verifyApplicant = Profile::where('user_id', $user_id)->first();
-        if ($verifyApplicant) {
-            $verifier = Profile::where('user_id', $id)->select('id')->first();
-            $user_identity = Auth::user()->id;
 
-            if ($verifier->id == $user_identity) {
+        $verifyApplicant = Profile::where('user_id', $user_id)->first();
+        //return $verifyApplicant->user_id;
+
+        //return $verifyApplicant;
+        if ($verifyApplicant->id) {
+//            $verifier = Profile::where('user_id', $id)->select('id')->first();
+            $verifier = Profile::where('user_id', $id)->first();
+            $user_identity = Auth::user()->id;
+            //return $user_identity.$verifier->user_id;
+
+            if ($verifier->user_id == $user_identity) {
+
+//                $p = Profile::with('user')
+//                    ->where('user_id', '=', $user_identity)
+//                    ->first();
+//                return $p;
+
 
                 return view('profile.edit', ['profile' => Profile::with('user')
-                    ->find($id), 'users' => User::where('type', 0)->get()]);
+                    ->where('user_id', '=', $user_identity)
+                    ->first(), 'users' => User::where('type', 0)->get()]);
             } else {
                 //return view('profile.index');
                 return 'Hello';
@@ -114,7 +127,6 @@ class ProfileController extends Controller
             return redirect('/profile')->with(['message' => 'Please fill the form']);
 
         }
-
 
 
     }
@@ -152,6 +164,16 @@ class ProfileController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //return 'Hello';
+    }
+
+    public function makeRegister($id, $profile_id)
+    {
+        $profile = Profile::find($profile_id);
+        $profile->company_id = $id;
+        $profile->update();
+
+        return redirect()->back()->with(['message' => 'Applicant selected']);
+
     }
 }

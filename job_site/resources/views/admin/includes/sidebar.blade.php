@@ -68,47 +68,7 @@
                     <a class="nav-link" href="{{route('/posts')}}">View All Jobs</a>
                 </li>
 
-                {{--<li class="nav-item has-treeview">--}}
-                    {{--<a href="#" class="nav-link">--}}
-                        {{--<p>--}}
-                            {{--Registration--}}
-                            {{--<i class="fa fa-angle-left right"></i>--}}
-                        {{--</p>--}}
-                    {{--</a>--}}
-                    {{--<ul class="nav nav-treeview">--}}
-                        {{--<li class="nav-item">--}}
-                            {{--<router-link :to="{path:'/register-user'}" class="nav-link">--}}
-                                {{--<i class="nav-icon fa fa-circle-o text-danger"></i>--}}
-                                {{--<p class="text">Registration Form</p>--}}
-                            {{--</router-link>--}}
-                        {{--</li>--}}
-                        {{--<li class="nav-item">--}}
-                            {{--<router-link :to="{path:'/login-form'}" class="nav-link">--}}
-                                {{--<i class="nav-icon fa fa-circle-o text-danger"></i>--}}
-                                {{--<p class="text">Login Form</p>--}}
-                            {{--</router-link>--}}
-                        {{--</li>--}}
 
-
-                        {{--@if(\Illuminate\Support\Facades\Auth::user())--}}
-                            {{--<li class="nav-item">--}}
-                                {{--<a class="dropdown-item" href="{{ route('logout') }}"--}}
-                                   {{--onclick="event.preventDefault();--}}
-                                                     {{--document.getElementById('logout-form').submit();">--}}
-                                    {{--{{ __('Logout') }}--}}
-                                {{--</a>--}}
-
-                                {{--<form id="logout-form" action="{{ route('logout') }}" method="POST"--}}
-                                      {{--style="display: none;">--}}
-                                    {{--@csrf--}}
-                                {{--</form>--}}
-                            {{--</li>--}}
-                        {{--@endif--}}
-
-
-                    {{--</ul>--}}
-
-                {{--</li>--}}
                 @can('isCompany')
                     {{--@if(\Illuminate\Support\Facades\Auth::user())--}}
 

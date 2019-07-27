@@ -62,7 +62,8 @@
 
                                     <div class="form-group">
                                         <div class="col-md-9 col-md-offset-3">
-                                            <a href="{{route('application.index')}}" name="btn" class="btn btn-success">Apply </a>
+                                            {{--<a href="{{route('application.index')}}" name="btn" class="btn btn-success">Apply </a>--}}
+                                            <a href="{{route('application/select',['id'=>$post->id])}}" name="btn" class="btn btn-success">Apply </a>
                                         </div>
                                     </div>
                                 @endcan

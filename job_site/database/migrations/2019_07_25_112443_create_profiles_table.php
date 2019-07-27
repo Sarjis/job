@@ -19,6 +19,8 @@ class CreateProfilesTable extends Migration
             $table->string('resume');
             $table->text('skills');
             $table->integer('user_id');
+            $table->integer('company_id')->nullable();
+
             $table->timestamps();
         });
     }

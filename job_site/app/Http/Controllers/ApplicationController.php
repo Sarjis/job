@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Post;
 use App\Profile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -9,16 +10,37 @@ use Illuminate\Support\Facades\Auth;
 class ApplicationController extends Controller
 {
 
-    public function index()
+//    public function index()
+//    {
+//        $id = Auth::user()->id;
+//        $verifyApplicant = Profile::where('user_id', $id)->first();
+//        //return $verifyApplicant;
+//
+//        if ($verifyApplicant) {
+//            //$post = new Post();
+//
+//            return redirect('/')->with(['message' => 'Successfully Applied']);
+//        } else {
+////            return view('profile.index')->with(['message'=>'Please fill the form']);
+//            return redirect('/profile')->with(['message' => 'Please fill the form']);
+//
+//        }
+//
+//    }
+
+    public function makeApplicationSelected($identity)
     {
         $id = Auth::user()->id;
         $verifyApplicant = Profile::where('user_id', $id)->first();
         //return $verifyApplicant;
 
         if ($verifyApplicant) {
-            return redirect('/')->with(['message' => 'Successfully Applied']);
+            $post = Post::find($identity);
+            $post->applicant_id= $id;
+            $post->update();
+
+            return redirect()->back()->with(['message'=>'Company Selected']);
         } else {
-//            return view('profile.index')->with(['message'=>'Please fill the form']);
             return redirect('/profile')->with(['message' => 'Please fill the form']);
 
         }
