@@ -10,6 +10,12 @@ use Image;
 
 class ProfileController extends Controller
 {
+    public function __construct()
+    {
+        //$this->authorize('isApplicant');
+
+
+    }
 
     public function index()
     {
@@ -23,11 +29,6 @@ class ProfileController extends Controller
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
@@ -37,15 +38,20 @@ class ProfileController extends Controller
     public function store(Request $request)
     {
         // return $request;
-//        request()->validate([
-//
-//            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-//            'resume' => 'required|mimes:application/pdf"',
-//
-//        ]);
+        request()->validate([
+
+            'image' => 'required',
+            'resume' => 'required',
+            'user_id' => 'required',
+            'skills' => 'required',
+
+        ]);
 
         //return $request->applicant_id;
-        if ($request->image && $request->resume){
+
+        if (Profile::where('user_id',$request->user_id)->first()){
+            return 'You have made it';
+        }else  if ($request->image && $request->resume){
             $imageName = time() . '.' . request()->image->getClientOriginalExtension();
             $imageUrl = request()->image->move(('images'), $imageName);
 
@@ -64,29 +70,21 @@ class ProfileController extends Controller
         }
 
 
+
+
 //
 //        return $request->all();
 //        Profile::create($request->all());
 //        return redirect('/profile')->with(['message'=>'saved']);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
         $verifier = Profile::where('user_id', $id)->select('id')->first();
@@ -96,7 +94,8 @@ class ProfileController extends Controller
 
         if ($verifier->id == $user_id) {
 
-            return view('profile.edit', ['profile' => Profile::with('user')->find($id), 'users' => User::all()]);
+            return view('profile.edit', ['profile' => Profile::with('user')
+                ->find($id), 'users' => User::where('type',0)->get()]);
         }else{
             //return view('profile.index');
             return 'Hello';
@@ -105,13 +104,6 @@ class ProfileController extends Controller
 
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $profile = Profile::find($id);

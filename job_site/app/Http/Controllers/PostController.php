@@ -10,11 +10,17 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
 
+    public function __construct()
+    {
+        //$this->authorize('isCompany');
+
+
+    }
     public function index()
     {
 
 //        return view('admin.post.index', ['companies' => Company::all('business_name', 'id')]);
-        return view('admin.post.index', ['companies' => User::where('business_name', '!=', 'applicant')]);
+        return view('admin.post.index', ['companies' => User::where('type', '1')->get()]);
     }
 
     public function create()

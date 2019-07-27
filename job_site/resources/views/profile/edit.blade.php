@@ -54,7 +54,7 @@
                                             @if($profile->user)
                                                 {{$profile->user->first_name}}
                                             @endif
-                                            <select name="user_id" class="form-control">
+                                            <select name="user_id" class="form-control form-control @error('user_id') is-invalid @enderror">
 
                                                 <option>Select Correct Name</option>
                                                 @foreach($users as $user)
@@ -70,6 +70,11 @@
                                                    class="btn btn-success"/>
                                         </div>
                                     </div>
+                                    @error('user_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
 
 
                                 </form>

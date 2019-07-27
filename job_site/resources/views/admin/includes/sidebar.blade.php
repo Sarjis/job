@@ -58,9 +58,11 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                 data-accordion="false">
 
-                <li class="nav-item has-treeview">
-                    <a class="nav-link" href="{{route('post.index')}}">Dashboard</a>
-                </li>
+
+                    <li class="nav-item has-treeview">
+                        <a class="nav-link" href="{{route('post.index')}}">Dashboard</a>
+                    </li>
+
                 <li class="nav-item has-treeview">
                     <a class="nav-link" href="{{route('/')}}">View Jobs</a>
                 </li>
@@ -106,41 +108,44 @@
                     </ul>
 
                 </li>
-                @if(\Illuminate\Support\Facades\Auth::user())
+                @can('isCompany')
+                {{--@if(\Illuminate\Support\Facades\Auth::user())--}}
 
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
-                        <p>
-                            Company
-                            <i class="fa fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{route('post.index')}}" class="nav-link">
-                                <i class="nav-icon fa fa-circle-o text-danger"></i>
-                                <p class="text">Post Job</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <p>
+                                Company
+                                <i class="fa fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{route('post.index')}}" class="nav-link">
+                                    <i class="nav-icon fa fa-circle-o text-danger"></i>
+                                    <p class="text">Post Job</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    @endcan
 
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
-                        <p>
-                            Applicant
-                            <i class="fa fa-angle-left right"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{route('profile.index')}}" class="nav-link">
-                                <i class="nav-icon fa fa-circle-o text-danger"></i>
-                                <p class="text">Create Profile</p>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul class="nav nav-treeview">
+                    @can('isApplicant')
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <p>
+                                Applicant
+                                <i class="fa fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{route('profile.index')}}" class="nav-link">
+                                    <i class="nav-icon fa fa-circle-o text-danger"></i>
+                                    <p class="text">Create Profile</p>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="nav nav-treeview">
 
                             <li class="nav-item">
                                 <a href="{{route('profile.edit',['profile'=>\Illuminate\Support\Facades\Auth::user()->id])}}"
@@ -150,9 +155,11 @@
                                 </a>
                             </li>
 
-                    </ul>
-                </li>
-                @endif
+                        </ul>
+                    </li>
+
+                    @endcan
+                {{--@endif--}}
             </ul>
 
         </nav>
