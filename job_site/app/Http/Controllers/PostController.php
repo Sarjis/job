@@ -10,6 +10,12 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
 
+    public function applicant_post()
+    {
+        //return Post::with('applicant')->get();
+        return view('admin.post.applicant-post', ['posts' => Post::with('applicant')->get()]);
+    }
+
     public function index()
     {
         return view('admin.post.index', ['companies' => User::where('type', '1')->get()]);

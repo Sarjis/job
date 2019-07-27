@@ -87,6 +87,14 @@
                                 </a>
                             </li>
                         </ul>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{route('applicant-post')}}" class="nav-link">
+                                    <i class="nav-icpost.indexon fa fa-circle-o text-danger"></i>
+                                    <p class="text">See Registered Applicant</p>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                 @endcan
 

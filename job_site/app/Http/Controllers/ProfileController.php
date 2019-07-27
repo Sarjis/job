@@ -108,19 +108,12 @@ class ProfileController extends Controller
             //return $user_identity.$verifier->user_id;
 
             if ($verifier->user_id == $user_identity) {
-
-//                $p = Profile::with('user')
-//                    ->where('user_id', '=', $user_identity)
-//                    ->first();
-//                return $p;
-
-
                 return view('profile.edit', ['profile' => Profile::with('user')
                     ->where('user_id', '=', $user_identity)
                     ->first(), 'users' => User::where('type', 0)->get()]);
             } else {
                 //return view('profile.index');
-                return 'Hello';
+                return redirect()->back()->with(['message' => 'Something wrong']);
             }
         } else {
 //            return view('profile.index')->with(['message'=>'Please fill the form']);

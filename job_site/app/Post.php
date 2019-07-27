@@ -14,4 +14,9 @@ class Post extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    function applicant()
+    {
+        return $this->belongsTo(User::class,'applicant_id');
+    }
 }
