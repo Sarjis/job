@@ -20,7 +20,7 @@ class CreatePostsTable extends Migration
             $table->float('salary');
             $table->text('location');
             $table->string('country');
-            $table->integer('company_id');
+            $table->integer('user_id');
             $table->timestamps();
         });
     }

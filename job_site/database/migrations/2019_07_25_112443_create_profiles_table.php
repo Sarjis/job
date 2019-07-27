@@ -18,7 +18,7 @@ class CreateProfilesTable extends Migration
             $table->string('image');
             $table->string('resume');
             $table->text('skills');
-            $table->integer('applicant_id');
+            $table->integer('user_id');
             $table->timestamps();
         });
     }

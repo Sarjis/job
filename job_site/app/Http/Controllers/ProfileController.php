@@ -18,7 +18,7 @@ class ProfileController extends Controller
     {
 
         //return User::where('business_name', 'applicant')->get();
-        return view('profile.index', ['applicants' =>  User::where('business_name', 'applicant')->get()]);
+        return view('profile.index', ['applicants' => User::where('business_name', 'applicant')->get()]);
 
     }
 
@@ -48,13 +48,13 @@ class ProfileController extends Controller
 
         $imageUrl = request()->image->move(public_path('images'), $imageName);
         $pdfUrl = request()->resume->move(public_path('docs'), $resume);
-        $profile =new Profile();
-        $profile->image= $imageUrl;
-        $profile->resume= $pdfUrl;
-        $profile->skills= $request->skills;
-        $profile->applicant_id= $request->applicant_id;
+        $profile = new Profile();
+        $profile->image = $imageUrl;
+        $profile->resume = $pdfUrl;
+        $profile->skills = $request->skills;
+        $profile->applicant_id = $request->applicant_id;
         $profile->save();
-        return redirect('/profile')->with(['message'=>'saved']);
+        return redirect('/profile')->with(['message' => 'saved']);
 
 //
 //        return $request->all();
@@ -81,7 +81,14 @@ class ProfileController extends Controller
      */
     public function edit($id)
     {
-        //
+        $verifier = Profile::where('applicant_id', $id);
+
+        if ($verifier) {
+
+            return view('profile.edit', ['profile' => Profile::find($id)]);
+        }
+        return view('profile.index');
+
     }
 
     /**

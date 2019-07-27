@@ -8,7 +8,8 @@
                 <thead>
                 <tr class="bg-primary">
                     <th>SL No.</th>
-                    <th>Job Title</th>
+                    <th>Title</th>
+                    <th>Description</th>
                     <th>Action</th>
 
                 </tr>
@@ -19,7 +20,7 @@
                     <tr>
                         <td>{{$i++}}</td>
                         <td>{{$post->Job_title}}</td>
-                        <td>{{$post->Job_Description}}</td>
+                        <td>{{$post->Job_description}}</td>
                         <td>
                             <a href="{{route('post.show',['post'=>$post->id])}}">Details</a>
                         </td>

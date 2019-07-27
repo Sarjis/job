@@ -87,29 +87,31 @@
                         </li>
 
 
-                        <li class="nav-item">
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                               onclick="event.preventDefault();
+                        @if(\Illuminate\Support\Facades\Auth::user())
+                            <li class="nav-item">
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
-                            </a>
+                                    {{ __('Logout') }}
+                                </a>
 
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                  style="display: none;">
-                                @csrf
-                            </form>
-                        </li>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                      style="display: none;">
+                                    @csrf
+                                </form>
+                            </li>
+                        @endif
 
 
                     </ul>
 
                 </li>
-
+                @if(\Illuminate\Support\Facades\Auth::user())
 
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <p>
-                            Post
+                            Company
                             <i class="fa fa-angle-left right"></i>
                         </p>
                     </a>
@@ -122,6 +124,35 @@
                         </li>
                     </ul>
                 </li>
+
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <p>
+                            Applicant
+                            <i class="fa fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{route('profile.index')}}" class="nav-link">
+                                <i class="nav-icon fa fa-circle-o text-danger"></i>
+                                <p class="text">Create Profile</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview">
+
+                            <li class="nav-item">
+                                <a href="{{route('profile.edit',['profile'=>\Illuminate\Support\Facades\Auth::user()->id])}}"
+                                   class="nav-link">
+                                    <i class="nav-icon fa fa-circle-o text-danger"></i>
+                                    <p class="text">Update Profile</p>
+                                </a>
+                            </li>
+
+                    </ul>
+                </li>
+                @endif
             </ul>
 
         </nav>
