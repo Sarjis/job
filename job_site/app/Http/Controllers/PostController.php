@@ -29,6 +29,17 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
+        request()->validate([
+
+            'Job_title' => 'required',
+            'Job_description' => 'required',
+            'salary' => 'required',
+            'location' => 'required',
+            'country' => 'required',
+            'user_id' => 'required',
+
+        ]);
+
         Post::create($request->all());
         return redirect('/post')->with(['message' => 'saved']);
     }
