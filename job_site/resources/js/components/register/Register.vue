@@ -12,17 +12,17 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label>First Name</label>
-                                    <input type="text" class="form-control" v-model="form.first_name" placeholder="First Name">
+                                    <input type="text" class="form-control" v-model="form.first_name" placeholder="First Name" required>
                                 </div>
 
                                 <div class="form-group">
                                     <label>Last Name</label>
-                                    <input type="text" class="form-control" v-model="form.last_name" placeholder="Last Name">
+                                    <input type="text" class="form-control" v-model="form.last_name" placeholder="Last Name" required>
                                 </div>
 
                                 <div class="form-group">
                                     <label>Registered As ? </label>
-                                    <select @change="changeType" class="form-control" v-model="form.type">
+                                    <select @change="changeType" class="form-control" v-model="form.type" required>
                                         <option  value="">se</option>
                                         <option value="0">Applicant</option>
                                         <option value="1">Company</option>
@@ -41,18 +41,18 @@
 
                                 <div class="form-group">
                                     <label>Email</label>
-                                    <input type="email" class="form-control" v-model="form.email" placeholder="Enter email">
+                                    <input type="email" class="form-control" v-model="form.email" required placeholder="Enter email">
                                 </div>
 
 
                                 <div class="form-group">
                                     <label>Password</label>
-                                    <input type="password" class="form-control" v-model="form.password">
+                                    <input type="password" class="form-control" v-model="form.password" required>
                                 </div>
 
                                 <div class="form-group">
                                     <label>Password</label>
-                                    <input type="password" class="form-control" v-model="form.password_confirmation" placeholder="Password">
+                                    <input type="password" class="form-control" v-model="form.password_confirmation" required placeholder="Password">
                                 </div>
 
 

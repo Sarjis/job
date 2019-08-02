@@ -20,9 +20,9 @@ class ProfileController extends Controller
     public function index()
     {
 
-        //return User::where('business_name', 'applicant')->get();
+        //return User::where('id', Auth::user()->id)->first();
         if (Auth::user()->id) {
-            return view('profile.index', ['applicants' => User::where('business_name', 'applicant')->get()]);
+            return view('profile.index', ['applicant' => User::where('id', Auth::user()->id)->first()]);
 
         }
         return view('admin.master');
@@ -32,25 +32,20 @@ class ProfileController extends Controller
     public function create()
     {
         return view('profile.create', ['profiles' => Profile::with('user')->get()]);
-        return;
     }
 
 
     public function store(Request $request)
     {
-        // return $request;
-        request()->validate([
-
+        $this->validate($request,[
             'image' => 'required',
             'resume' => 'required',
-            'user_id' => 'required',
             'skills' => 'required',
-
         ]);
 
         //return $request->applicant_id;
 
-        if (Profile::where('user_id', $request->user_id)->first()) {
+        if (Profile::where('user_id', Auth::user()->id)->first()) {
             return 'You have made it';
         } else if ($request->image && $request->resume) {
             $imageName = time() . '.' . request()->image->getClientOriginalExtension();
@@ -65,7 +60,7 @@ class ProfileController extends Controller
             $profile->resume = $pdfUrl;
 
             $profile->skills = $request->skills;
-            $profile->user_id = $request->user_id;
+            $profile->user_id = Auth::user()->id;
             $profile->save();
             return redirect('/profile')->with(['message' => 'saved']);
         }
@@ -74,18 +69,10 @@ class ProfileController extends Controller
 
     public function show($id)
     {
-        //return $id;
-        $user_id = Auth::user()->id;
-        //return $user_id;
-        $verifyApplicant = Profile::where('user_id', $user_id)->first();
-        //return $verifyApplicant;
-
+        $verifyApplicant = Profile::where('user_id', Auth::user()->id)->first();
         if ($verifyApplicant->id) {
-
-            //return Profile::where('user_id',$id);
             return view('profile.show', ['profile' => Profile::where('user_id', $id)->first()]);
         } else {
-//            return view('profile.index')->with(['message'=>'Please fill the form']);
             return redirect('/profile')->with(['message' => 'Please fill the form']);
 
         }
@@ -95,31 +82,39 @@ class ProfileController extends Controller
 
     public function edit($id)
     {
-        $user_id = Auth::user()->id;
+        if (Auth::user()->id == $id) {
+            $user_type_checker = User::where('type', 0)->get();
+            if ($user_type_checker) {
+                $is_profile_exist = Profile::where('user_id', Auth::user()->id)->first();
+                if ($is_profile_exist) {
+                    if ($is_profile_exist->id) {
+                        $verifier = Profile::where('user_id', $id)->first();
 
-        $verifyApplicant = Profile::where('user_id', $user_id)->first();
-        //return $verifyApplicant->user_id;
+                        if ($verifier) {
+                            return view('profile.edit', ['profile' => Profile::with('user')
+                                ->where('user_id', '=', Auth::user()->id)
+                                ->first(), 'user' => User::where('type', 0)->where('id', Auth::user()->id)->first()]);
+                        } else {
+                            return redirect()->back()->with(['message' => 'Something wrong']);
+                        }
 
-        //return $verifyApplicant;
-        if ($verifyApplicant->id) {
-//            $verifier = Profile::where('user_id', $id)->select('id')->first();
-            $verifier = Profile::where('user_id', $id)->first();
-            $user_identity = Auth::user()->id;
-            //return $user_identity.$verifier->user_id;
-
-            if ($verifier->user_id == $user_identity) {
-                return view('profile.edit', ['profile' => Profile::with('user')
-                    ->where('user_id', '=', $user_identity)
-                    ->first(), 'users' => User::where('type', 0)->get()]);
+                    } else {
+                        return redirect('/profile')->with(['message' => 'Please fill the form']);
+                    }
+                } else {
+                    return 'Un Authorized';
+                }
             } else {
-                //return view('profile.index');
-                return redirect()->back()->with(['message' => 'Something wrong']);
+                return 'Nop';
             }
         } else {
-//            return view('profile.index')->with(['message'=>'Please fill the form']);
-            return redirect('/profile')->with(['message' => 'Please fill the form']);
-
+            return redirect()->back()->with(['message' => 'You are not allowed to access others account']);
         }
+
+//        $app->bind('path.public', function (){
+//            return __DIR__;
+//        });
+//    'options'=>[\PDO::ATTR_EMULATE_PREPARES=>true],
 
 
     }
@@ -139,13 +134,13 @@ class ProfileController extends Controller
             unlink($profile->resume);
 
             $profile->skills = $request->skills;
-            $profile->user_id = $request->user_id;
+            $profile->user_id = Auth::user()->id;
             $profile->resume = $pdfUrl;
             $profile->image = $imageUrl;
             $profile->update();
             return redirect('/profile')->with(['message' => 'Updated']);
         }
-        return 'Hello';
+        return redirect('/profile')->with(['message' => "You didn't change anything"]);
 
     }
 

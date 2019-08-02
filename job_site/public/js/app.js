@@ -37302,7 +37302,11 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control",
-                      attrs: { type: "email", placeholder: "Enter email" },
+                      attrs: {
+                        type: "email",
+                        required: "",
+                        placeholder: "Enter email"
+                      },
                       domProps: { value: _vm.form.email },
                       on: {
                         input: function($event) {
@@ -37328,7 +37332,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control",
-                      attrs: { type: "password" },
+                      attrs: { type: "password", required: "" },
                       domProps: { value: _vm.form.password },
                       on: {
                         input: function($event) {
@@ -37417,7 +37421,11 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control",
-                      attrs: { type: "text", placeholder: "First Name" },
+                      attrs: {
+                        type: "text",
+                        placeholder: "First Name",
+                        required: ""
+                      },
                       domProps: { value: _vm.form.first_name },
                       on: {
                         input: function($event) {
@@ -37443,7 +37451,11 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control",
-                      attrs: { type: "text", placeholder: "Last Name" },
+                      attrs: {
+                        type: "text",
+                        placeholder: "Last Name",
+                        required: ""
+                      },
                       domProps: { value: _vm.form.last_name },
                       on: {
                         input: function($event) {
@@ -37471,6 +37483,7 @@ var render = function() {
                           }
                         ],
                         staticClass: "form-control",
+                        attrs: { required: "" },
                         on: {
                           change: [
                             function($event) {
@@ -37556,7 +37569,11 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control",
-                      attrs: { type: "email", placeholder: "Enter email" },
+                      attrs: {
+                        type: "email",
+                        required: "",
+                        placeholder: "Enter email"
+                      },
                       domProps: { value: _vm.form.email },
                       on: {
                         input: function($event) {
@@ -37582,7 +37599,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control",
-                      attrs: { type: "password" },
+                      attrs: { type: "password", required: "" },
                       domProps: { value: _vm.form.password },
                       on: {
                         input: function($event) {
@@ -37608,7 +37625,11 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control",
-                      attrs: { type: "password", placeholder: "Password" },
+                      attrs: {
+                        type: "password",
+                        required: "",
+                        placeholder: "Password"
+                      },
                       domProps: { value: _vm.form.password_confirmation },
                       on: {
                         input: function($event) {

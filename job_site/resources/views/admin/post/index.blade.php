@@ -14,39 +14,39 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-3">Job Title</label>
                                     <div class="col-md-9">
-                                        <input type="text" name="Job_title" class="form-control"/>
+                                        <input type="text" name="Job_title" class="form-control" required/>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-3">Job Description</label>
                                     <div class="col-md-9">
-                                        <input type="text" name="Job_description" class="form-control"/>
+                                        <input type="text" name="Job_description" class="form-control" required/>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <label class="control-label col-md-3">Salary</label>
                                     <div class="col-md-9">
-                                        <input type="text" name="salary" class="form-control"/>
+                                        <input type="text" name="salary" class="form-control" required/>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-3">Location</label>
                                     <div class="col-md-9">
-                                        <input type="text" name="location" class="form-control"/>
+                                        <input type="text" name="location" class="form-control" required/>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-3">Country</label>
                                     <div class="col-md-9">
-                                        <input type="text" name="country" class="form-control"/>
+                                        <input type="text" name="country" class="form-control" required/>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-3">Company Name</label>
                                     <div class="col-md-9">
 
-                                        <select name="user_id" class="form-control">
+                                        <select name="user_id" class="form-control" required>
                                             @foreach($companies as $company)
                                                 <option value="{{$company->id}}">{{$company->business_name}}</option>
                                             @endforeach

@@ -2,14 +2,14 @@
 
 @section('body')
     @can('isApplicant')
-    <div class="content-wrapper">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-10 col-md-offset-1">
-                    <div class="panel panel-default">
-                        <h3 class="text-center text-success"> {{Session::get('message')}}</h3>
+        <div class="content-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <div class="panel panel-default">
+                            <h3 class="text-center text-success"> {{Session::get('message')}}</h3>
 
-                        {{--@if($profile && \Illuminate\Support\Facades\Auth::user())--}}
+                            {{--@if($profile && \Illuminate\Support\Facades\Auth::user())--}}
                             <div class="panel-body">
 
                                 <form accept-charset="UTF-8"
@@ -54,21 +54,26 @@
                                         <div class="col-md-9">
                                             @if($profile->user)
                                                 {{$profile->user->first_name}}
+                                                {{$profile->user->last_name}}
                                             @endif
-                                            <select name="user_id" class="form-control form-control @error('user_id') is-invalid @enderror">
+                                            {{--<select name="user_id" class="form-control form-control @error('user_id') is-invalid @enderror">--}}
 
-                                                <option>Select Correct Name</option>
-                                                @foreach($users as $user)
-                                                    <option value="{{$user->id}}">{{$user->first_name}} {{$user->last_name}} </option>
-                                                @endforeach
-                                            </select>
+                                            {{--<option>Select Correct Name</option>--}}
+                                            {{--@foreach($users as $user)--}}
+                                            {{--<option value="{{$user->id}}">{{$user->first_name}} {{$user->last_name}} </option>--}}
+                                            {{--@endforeach--}}
+                                            {{--</select>--}}
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <div class="col-md-9 col-md-offset-3">
-                                            <input type="submit" name="btn" value="Update Profile Info"
-                                                   class="btn btn-success"/>
+                                            <a href="{{route('/posts')}}" name="btn"
+                                               class="btn btn-success"> Cancel </a>
+
+                                                <input type="submit" name="btn"
+                                                       value="Update Profile Info"
+                                                       class="btn btn-success"/>
                                         </div>
                                     </div>
                                     @error('user_id')
@@ -80,13 +85,13 @@
 
                                 </form>
                             </div>
-                        {{--@else--}}
+                            {{--@else--}}
                             {{--<h1>You are not allowed to Edit</h1>--}}
-                        {{--@endif--}}
+                            {{--@endif--}}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     @endcan
 @endsection

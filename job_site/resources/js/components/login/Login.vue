@@ -13,13 +13,13 @@
 
                                 <div class="form-group">
                                     <label>Email</label>
-                                    <input type="email" class="form-control" v-model="form.email" placeholder="Enter email">
+                                    <input type="email" class="form-control" v-model="form.email" required placeholder="Enter email">
                                 </div>
 
 
                                 <div class="form-group">
                                     <label>Password</label>
-                                    <input type="password" class="form-control" v-model="form.password">
+                                    <input type="password" class="form-control" v-model="form.password" required>
                                 </div>
 
 

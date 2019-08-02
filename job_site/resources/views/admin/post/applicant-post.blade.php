@@ -1,6 +1,7 @@
 @extends('admin.master')
 
 @section('body')
+    @can('isCompany')
     <div class="content-wrapper">
         <h3 class="text-center text-success"> {{Session::get('message')}}</h3>
         <div class="table-responsive">
@@ -36,4 +37,5 @@
             </table>
         </div>
     </div>
+    @endcan
 @endsection
